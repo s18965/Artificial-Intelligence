@@ -11,6 +11,11 @@ public class Main {
     public static void main(String[] args) {
     Knapsack knapsack = new Knapsack();
     Item items[]=readFromFile("knapsack.txt",knapsack);
+    System.out.println("Knapsack capacity: "+ knapsack.capacity+"\nItems number: "+knapsack.maxQuantity+"\n");
+    int counter=1;
+    for(Item i:items){
+        System.out.println(counter+++". weight: "+i.weight +" value: "+i.value);
+    }
     int biggestSum= getBiggestSum(knapsack,items);
     System.out.println("\nFinal Vector:" + knapsack.bestVector.toString());
     System.out.println("Biggest sum: " + biggestSum);
@@ -52,7 +57,7 @@ public class Main {
     int currentSum=0;
     int currentWeight=0;
     for(int i=0; i<numberOfPossibilities;i++){
-        System.out.print(i + ". -> ");
+        //System.out.print(i + ". -> ");
         for(int j=0; j<items.length;j++){
             bit=i>>j &1;
             currentVector.add(bit);
@@ -60,20 +65,21 @@ public class Main {
                 currentSum+=bit*items[j].value;
                 currentWeight+=bit*items[j].weight;
             }
-            System.out.print(bit+" ");
+            //System.out.print(bit+" ");
         }
         if(currentSum>biggestSum && currentWeight<=knapsack.capacity){
             biggestSum = currentSum;
             biggestWeight = currentWeight;
             knapsack.bestVector.clear();
             knapsack.bestVector.addAll(currentVector);
-            System.out.println("\n\nNew Biggest Vector: " +knapsack.getBestVector().toString() + " biggest sum: "+biggestSum  + " weight: " +biggestWeight);
+            System.out.println("\n\nNew Best Vector: " +knapsack.getBestVector().toString() + " biggest sum: "+biggestSum  + " weight: " +biggestWeight + " iteration nr "+i);
         }
-        System.out.println();
+        //System.out.println();
         currentVector.clear();
         currentSum=0;
         currentWeight=0;
     }
+        System.out.println("\nNumber of iterations: "+numberOfPossibilities);
     return biggestSum;
     }
 }
