@@ -5,3 +5,4 @@ Artificial Intelligence class assignments
 4. K-Means
 5. Naive Bayes classifier
 6. Knapsack Problem
+7. Huffman
